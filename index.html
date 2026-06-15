@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نظام استلام المستندات الإلكترونية – مدرسة أبو القاسم الزهراوي</title>
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:        #d71920;
+      --red-dark:   #b5151b;
+      --green:      #007a3d;
+      --green-light:#eefaf3;
+      --white:      #ffffff;
+      --text-dark:  #1f2937;
+      --text-muted: #6b7280;
+      --border:     #e5e7eb;
+      --shadow:     0 4px 24px rgba(0,0,0,.08);
+      --radius:     14px;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+      background: #f3f4f6;
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── Header ───────────────────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, var(--red) 0%, #a00e14 100%);
+      color: var(--white);
+      padding: 24px 16px 20px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,.2);
+    }
+
+    .header-logo {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      border-radius: 50%;
+      background: var(--white);
+      padding: 6px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    }
+
+    .header-logo-placeholder {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.2);
+      border: 3px solid rgba(255,255,255,.5);
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+    }
+
+    header h1 {
+      font-size: clamp(1.1rem, 4vw, 1.4rem);
+      font-weight: 700;
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+
+    header h2 {
+      font-size: clamp(0.85rem, 3vw, 1rem);
+      font-weight: 400;
+      opacity: .9;
+    }
+
+    /* ─── Privacy Banner ────────────────────────────────────── */
+    .privacy-banner {
+      background: #fff8e1;
+      border-bottom: 2px solid #f59e0b;
+      padding: 10px 16px;
+      text-align: center;
+      font-size: .85rem;
+      color: #92400e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .privacy-banner span.icon { font-size: 1.1rem; }
+
+    /* ─── Main ──────────────────────────────────────────────── */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 28px 16px 40px;
+      gap: 20px;
+    }
+
+    /* ─── Welcome Card ──────────────────────────────────────── */
+    .welcome-card {
+      background: var(--green-light);
+      border: 1px solid #bbf0d5;
+      border-right: 5px solid var(--green);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      width: 100%;
+      max-width: 560px;
+      color: #064e29;
+      font-size: .92rem;
+      line-height: 1.7;
+    }
+
+    /* ─── Search Card ───────────────────────────────────────── */
+    .search-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 24px;
+      width: 100%;
+      max-width: 560px;
+    }
+
+    .search-card label {
+      display: block;
+      font-weight: 600;
+      font-size: .95rem;
+      margin-bottom: 10px;
+      color: var(--text-dark);
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-wrapper input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-family: inherit;
+      direction: ltr;
+      letter-spacing: 1px;
+      color: var(--text-dark);
+      transition: border-color .2s;
+      outline: none;
+    }
+
+    .input-wrapper input:focus {
+      border-color: var(--red);
+    }
+
+    .input-wrapper input::placeholder {
+      color: #9ca3af;
+      letter-spacing: 0;
+      direction: rtl;
+    }
+
+    .btn-search {
+      margin-top: 14px;
+      width: 100%;
+      padding: 14px;
+      background: var(--red);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background .2s, transform .1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-search:hover  { background: var(--red-dark); }
+    .btn-search:active { transform: scale(.98); }
+    .btn-search:disabled { background: #9ca3af; cursor: not-allowed; }
+
+    /* ─── Loading ───────────────────────────────────────────── */
+    #loading {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 20px;
+      color: var(--text-muted);
+      font-size: .95rem;
+    }
+
+    .spinner {
+      width: 28px;
+      height: 28px;
+      border: 3px solid var(--border);
+      border-top-color: var(--red);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── Result Card ───────────────────────────────────────── */
+    #result {
+      display: none;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      width: 100%;
+      max-width: 560px;
+      border-top: 5px solid var(--green);
+    }
+
+    .result-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .result-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--green-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+
+    .result-header h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    .result-header p {
+      font-size: .85rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .info-item {
+      background: #f9fafb;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .info-item .label {
+      font-size: .78rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .info-item .value {
+      font-size: .97rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .btn-download {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 15px;
+      background: var(--red);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .2s, transform .1s;
+    }
+
+    .btn-download:hover  { background: var(--red-dark); }
+    .btn-download:active { transform: scale(.98); }
+
+    .btn-download svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ─── Error Card ────────────────────────────────────────── */
+    #error-msg {
+      display: none;
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      border-right: 5px solid var(--red);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      width: 100%;
+      max-width: 560px;
+      color: #9f1239;
+      font-size: .92rem;
+      display: none;
+      align-items: center;
+      gap: 12px;
+    }
+
+    #error-msg .err-icon { font-size: 1.5rem; flex-shrink: 0; }
+
+    /* ─── Footer ────────────────────────────────────────────── */
+    footer {
+      background: var(--text-dark);
+      color: #9ca3af;
+      text-align: center;
+      padding: 16px;
+      font-size: .82rem;
+      margin-top: auto;
+    }
+
+    footer span { color: var(--red); }
+
+    /* ─── Responsive ────────────────────────────────────────── */
+    @media (max-width: 400px) {
+      .info-grid { grid-template-columns: 1fr; }
+      .search-card, #result { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ HEADER ═══════════════════════════════════════════════ -->
+  <header>
+    <!-- ضع ملف logo.png داخل مجلد assets/ ليظهر هنا تلقائيًا -->
+    <img
+      src="assets/logo.png"
+      alt="شعار المدرسة"
+      class="header-logo"
+      onerror="this.style.display='none'; document.getElementById('logo-placeholder').style.display='flex';"
+    />
+    <div id="logo-placeholder" class="header-logo-placeholder" style="display:none;">🏫</div>
+    <h1>مدرسة أبو القاسم الزهراوي للتعليم الأساسي (٥–٩)</h1>
+    <h2>نظام استلام المستندات الإلكترونية</h2>
+  </header>
+
+  <!-- ═══ PRIVACY BANNER ════════════════════════════════════════ -->
+  <div class="privacy-banner">
+    <span class="icon">🔒</span>
+    <span>يرجى عدم مشاركة المستندات أو الروابط حفاظًا على خصوصية الطلبة.</span>
+  </div>
+
+  <!-- ═══ MAIN ══════════════════════════════════════════════════ -->
+  <main>
+
+    <!-- رسالة الترحيب -->
+    <div class="welcome-card">
+      مرحبًا بكم أولياء الأمور الكرام، يمكنكم استلام شهادة الطالب إلكترونيًا عبر إدخال الرقم المدني ثم الضغط على زر البحث.
+    </div>
+
+    <!-- بطاقة البحث -->
+    <div class="search-card">
+      <label for="civil-input">🔍 الرقم المدني للطالب</label>
+      <div class="input-wrapper">
+        <input
+          type="text"
+          id="civil-input"
+          inputmode="numeric"
+          maxlength="20"
+          placeholder="أدخل الرقم المدني هنا"
+          autocomplete="off"
+        />
+      </div>
+      <button class="btn-search" onclick="doSearch()" id="search-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5"
+             stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        بحث عن الشهادة
+      </button>
+    </div>
+
+    <!-- Loading -->
+    <div id="loading">
+      <div class="spinner"></div>
+      <span>جارٍ البحث…</span>
+    </div>
+
+    <!-- نتيجة البحث -->
+    <div id="result">
+      <div class="result-header">
+        <div class="result-icon">✅</div>
+        <div>
+          <h3>تم العثور على الشهادة</h3>
+          <p>يمكنك تحميل الشهادة أدناه</p>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="label">اسم الطالب</div>
+          <div class="value" id="r-name">—</div>
+        </div>
+        <div class="info-item">
+          <div class="label">الصف</div>
+          <div class="value" id="r-grade">—</div>
+        </div>
+        <div class="info-item">
+          <div class="label">الشعبة</div>
+          <div class="value" id="r-class">—</div>
+        </div>
+        <div class="info-item">
+          <div class="label">الرقم المدني</div>
+          <div class="value" id="r-id">—</div>
+        </div>
+      </div>
+
+      <a id="download-link" href="#" download class="btn-download">
+        <svg viewBox="0 0 24 24">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        تحميل الشهادة PDF
+      </a>
+    </div>
+
+    <!-- رسالة الخطأ -->
+    <div id="error-msg">
+      <span class="err-icon">❌</span>
+      <span id="error-text">لم يتم العثور على نتيجة بهذا الرقم المدني. يرجى التأكد من الرقم والمحاولة مجددًا.</span>
+    </div>
+
+  </main>
+
+  <!-- ═══ FOOTER ════════════════════════════════════════════════ -->
+  <footer>
+    <span>©</span> مدرسة أبو القاسم الزهراوي للتعليم الأساسي (٥–٩) – جميع الحقوق محفوظة
+  </footer>
+
+  <!-- ═══ JAVASCRIPT ════════════════════════════════════════════ -->
+  <script>
+    // رابط ملف البيانات (يمكن تغييره إذا رفعت الملف في مكان آخر)
+    const DATA_URL = 'students.json';
+
+    let studentsData = null;
+
+    // ─── تحميل البيانات مسبقًا عند فتح الصفحة ──────────────────
+    async function preload() {
+      try {
+        const res = await fetch(DATA_URL);
+        if (!res.ok) throw new Error('fetch failed');
+        studentsData = await res.json();
+      } catch (e) {
+        // سيتم إعادة المحاولة عند الضغط على بحث
+        studentsData = null;
+      }
+    }
+    preload();
+
+    // ─── السماح بالبحث بضغط Enter ───────────────────────────────
+    document.getElementById('civil-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') doSearch();
+    });
+
+    // ─── دالة البحث الرئيسية ─────────────────────────────────────
+    async function doSearch() {
+      const raw   = document.getElementById('civil-input').value.trim();
+      const query = raw.replace(/\s+/g, '');
+
+      // إخفاء نتائج سابقة
+      hide('result');
+      hide('error-msg');
+
+      if (!query) {
+        showError('يرجى إدخال الرقم المدني أولًا.');
+        return;
+      }
+
+      // إظهار loading
+      setLoading(true);
+
+      try {
+        // إذا لم تُحمَّل البيانات مسبقًا، نحملها الآن
+        if (!studentsData) {
+          const res = await fetch(DATA_URL + '?t=' + Date.now());
+          if (!res.ok) throw new Error('لا يمكن تحميل بيانات الطلاب.');
+          studentsData = await res.json();
+        }
+
+        // بحث (غير حساس للمسافات)
+        const student = studentsData.find(
+          s => String(s.civil_id).trim() === query
+        );
+
+        setLoading(false);
+
+        if (student) {
+          showResult(student);
+        } else {
+          showError('لم يتم العثور على نتيجة بهذا الرقم المدني. يرجى التأكد من الرقم والمحاولة مجددًا.');
+        }
+
+      } catch (err) {
+        setLoading(false);
+        showError('حدث خطأ أثناء البحث: ' + err.message);
+      }
+    }
+
+    // ─── مساعدات ─────────────────────────────────────────────────
+    function show(id) {
+      const el = document.getElementById(id);
+      el.style.display = 'flex';
+    }
+
+    function hide(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    function setLoading(on) {
+      document.getElementById('loading').style.display = on ? 'flex' : 'none';
+      document.getElementById('search-btn').disabled = on;
+    }
+
+    function showResult(s) {
+      document.getElementById('r-name').textContent  = s.student_name;
+      document.getElementById('r-grade').textContent = s.grade;
+      document.getElementById('r-class').textContent = s.class;
+      document.getElementById('r-id').textContent    = s.civil_id;
+
+      const link = document.getElementById('download-link');
+      link.href     = s.pdf;
+      link.download = s.student_name + '.pdf';
+
+      show('result');
+      document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function showError(msg) {
+      document.getElementById('error-text').textContent = msg;
+      show('error-msg');
+    }
+  </script>
+
+</body>
+</html>
