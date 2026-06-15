@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>نظام استلام المستندات – مدرسة أبو القاسم الزهراوي | تأثيرات زجاجية</title>
-  <!-- Google Fonts: Tajawal (حديث وأنيق للعربية) -->
+  <title>نظام استلام المستندات – مدرسة أبو القاسم الزهراوي (بيانات تجريبية مدمجة)</title>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
   <style>
-    /* ─── Reset & Base مع تأثيرات زجاجية ───────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --red:        #d71920;
-      --red-dark:   #b5151b;
-      --green:      #007a3d;
-      --green-light:#eefaf3;
-      --white:      #ffffff;
-      --text-dark:  #1f2937;
+      --red: #d71920;
+      --red-dark: #b5151b;
+      --green: #007a3d;
+      --green-light: #eefaf3;
+      --white: #ffffff;
+      --text-dark: #1f2937;
       --text-muted: #4b5563;
-      --border:     #e5e7eb;
-      --shadow:     0 8px 28px rgba(0,0,0,.08);
-      --radius:     20px;
-      --glass-bg:   rgba(255, 255, 255, 0.7);
+      --border: #e5e7eb;
+      --shadow: 0 8px 28px rgba(0, 0, 0, .08);
+      --radius: 20px;
+      --glass-bg: rgba(255, 255, 255, 0.7);
       --glass-border: rgba(255, 255, 255, 0.5);
       --glass-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     }
@@ -35,18 +35,16 @@
       flex-direction: column;
       line-height: 1.5;
       font-weight: 400;
-      backdrop-filter: blur(0px);
     }
 
-    /* هيدر زجاجي */
     header {
       background: rgba(215, 25, 32, 0.75);
       backdrop-filter: blur(12px);
       color: white;
       padding: 28px 16px 24px;
       text-align: center;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-      border-bottom: 1px solid rgba(255,255,255,0.3);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     }
 
     .header-logo {
@@ -54,22 +52,21 @@
       height: 84px;
       object-fit: contain;
       border-radius: 50%;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(4px);
       padding: 6px;
       margin-bottom: 14px;
-      transition: transform 0.2s ease, box-shadow 0.2s;
-      border: 1px solid rgba(255,255,255,0.4);
+      transition: 0.2s;
+      border: 1px solid rgba(255, 255, 255, 0.4);
     }
-    .header-logo:hover { transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
 
     .header-logo-placeholder {
       width: 84px;
       height: 84px;
       border-radius: 50%;
-      background: rgba(255,255,255,.2);
+      background: rgba(255, 255, 255, .2);
       backdrop-filter: blur(5px);
-      border: 2px solid rgba(255,255,255,.6);
+      border: 2px solid rgba(255, 255, 255, .6);
       margin: 0 auto 14px;
       display: flex;
       align-items: center;
@@ -77,18 +74,9 @@
       font-size: 36px;
     }
 
-    header h1 {
-      font-size: clamp(1.3rem, 5vw, 1.8rem);
-      font-weight: 800;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-    header h2 {
-      font-size: clamp(0.9rem, 3.5vw, 1.1rem);
-      font-weight: 500;
-      opacity: 0.95;
-    }
+    header h1 { font-size: clamp(1.3rem, 5vw, 1.8rem); font-weight: 800; }
+    header h2 { font-size: clamp(0.9rem, 3.5vw, 1.1rem); font-weight: 500; }
 
-    /* banner زجاجي */
     .privacy-banner {
       background: rgba(255, 247, 230, 0.8);
       backdrop-filter: blur(8px);
@@ -104,7 +92,6 @@
       flex-wrap: wrap;
     }
 
-    /* main */
     main {
       flex: 1;
       display: flex;
@@ -114,8 +101,10 @@
       gap: 24px;
     }
 
-    /* بطاقات زجاجية */
-    .welcome-card, .search-card, #result, #error-msg {
+    .welcome-card,
+    .search-card,
+    #result,
+    #error-msg {
       width: 100%;
       max-width: 640px;
       border-radius: var(--radius);
@@ -123,7 +112,6 @@
       backdrop-filter: blur(12px);
       box-shadow: var(--glass-shadow);
       border: 1px solid rgba(255, 255, 255, 0.6);
-      transition: all 0.3s ease;
     }
 
     .welcome-card {
@@ -132,49 +120,43 @@
       padding: 18px 24px;
       font-size: 1rem;
       font-weight: 500;
-      line-height: 1.7;
     }
 
-    .search-card {
-      padding: 32px 28px;
-    }
-
+    .search-card { padding: 32px 28px; }
     .search-card label {
       font-weight: 800;
       font-size: 1.05rem;
       margin-bottom: 12px;
       display: flex;
-      align-items: center;
       gap: 8px;
-      color: #1f2a3e;
     }
 
-    /* حقل الإدخال بتأثير زجاجي */
     .input-wrapper {
       position: relative;
       display: flex;
       align-items: center;
     }
+
     .input-wrapper input {
       width: 100%;
       padding: 14px 48px 14px 16px;
-      border: 2px solid rgba(255,255,255,0.8);
+      border: 2px solid rgba(255, 255, 255, 0.8);
       border-radius: 40px;
       font-size: 1rem;
       font-family: 'Tajawal', monospace;
       background: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(4px);
-      transition: all 0.2s;
+      transition: 0.2s;
       direction: ltr;
-      font-weight: 500;
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
     }
+
     .input-wrapper input:focus {
       border-color: var(--red);
       background: rgba(255, 255, 255, 0.9);
       outline: none;
-      box-shadow: 0 0 0 3px rgba(215,25,32,0.2);
+      box-shadow: 0 0 0 3px rgba(215, 25, 32, 0.2);
     }
+
     .clear-input {
       position: absolute;
       left: 12px;
@@ -192,14 +174,8 @@
       cursor: pointer;
       font-weight: bold;
       font-size: 18px;
-      transition: 0.2s;
-    }
-    .clear-input:hover {
-      background: rgba(203, 213, 225, 0.9);
-      transform: translateY(-50%) scale(1.05);
     }
 
-    /* زر البحث زجاجي مع تأثير */
     .btn-search {
       margin-top: 20px;
       width: 100%;
@@ -207,29 +183,24 @@
       background: rgba(215, 25, 32, 0.85);
       backdrop-filter: blur(8px);
       color: white;
-      border: 1px solid rgba(255,255,255,0.4);
+      border: 1px solid rgba(255, 255, 255, 0.4);
       border-radius: 50px;
       font-size: 1.05rem;
       font-weight: 800;
-      font-family: inherit;
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition: 0.25s;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
+
     .btn-search:hover {
       background: var(--red);
       transform: translateY(-2px);
-      box-shadow: 0 10px 20px -5px rgba(215,25,32,0.4);
-      border-color: rgba(255,255,255,0.7);
+      box-shadow: 0 10px 20px -5px rgba(215, 25, 32, 0.4);
     }
-    .btn-search:active { transform: translateY(1px); }
-    .btn-search:disabled { background: #a0aec0; cursor: not-allowed; transform: none; }
 
-    /* loading زجاجي */
     #loading {
       display: none;
       flex-direction: column;
@@ -239,30 +210,37 @@
       backdrop-filter: blur(12px);
       padding: 20px 32px;
       border-radius: 60px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      border: 1px solid rgba(255,255,255,0.5);
-      font-weight: 500;
     }
+
     .spinner {
       width: 38px;
       height: 38px;
-      border: 4px solid rgba(215,25,32,0.2);
+      border: 4px solid rgba(215, 25, 32, 0.2);
       border-top-color: var(--red);
       border-radius: 50%;
       animation: spin 0.7s linear infinite;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* result card زجاجي */
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
     #result {
+      display: none;
       background: rgba(255, 255, 255, 0.8);
       padding: 28px;
       border-top: 6px solid var(--green);
-      animation: fadeSlideUp 0.3s ease;
     }
-    .result-header { display: flex; gap: 16px; margin-bottom: 24px; }
+
+    .result-header {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
     .result-icon {
-      width: 58px; height: 58px;
+      width: 58px;
+      height: 58px;
       background: rgba(0, 122, 61, 0.15);
       backdrop-filter: blur(4px);
       border-radius: 60px;
@@ -271,36 +249,40 @@
       justify-content: center;
       font-size: 28px;
     }
+
     .result-header h3 {
       font-size: 1.3rem;
       font-weight: 800;
       color: var(--green);
     }
-    .result-header p { font-size: 0.85rem; font-weight: 500; }
 
-    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
     .info-item {
       background: rgba(248, 250, 252, 0.7);
       backdrop-filter: blur(4px);
       border-radius: 20px;
       padding: 12px 16px;
-      border: 1px solid rgba(255,255,255,0.6);
-      transition: 0.2s;
     }
-    .info-item:hover { background: rgba(255,255,255,0.9); transform: translateY(-2px); }
+
     .info-item .label {
       font-size: 0.7rem;
       font-weight: 700;
       text-transform: uppercase;
       color: #4a5b7a;
     }
+
     .info-item .value {
       font-size: 1.05rem;
       font-weight: 800;
       margin-top: 6px;
     }
 
-    /* زر التحميل زجاجي */
     .btn-download {
       display: flex;
       align-items: center;
@@ -312,39 +294,26 @@
       border-radius: 50px;
       color: white;
       font-weight: 800;
-      font-size: 1rem;
       text-decoration: none;
-      transition: 0.25s;
-      border: 1px solid rgba(255,255,255,0.4);
-    }
-    .btn-download:hover {
-      background: #007a3d;
-      transform: scale(0.98);
-      box-shadow: 0 8px 20px rgba(0,122,61,0.3);
     }
 
-    /* error card زجاجي */
     #error-msg {
+      display: none;
       background: rgba(255, 240, 242, 0.85);
       border-right: 6px solid var(--red);
       padding: 20px 24px;
-      display: none;
       align-items: center;
       gap: 14px;
-      font-weight: 500;
     }
 
-    /* footer زجاجي داكن */
     footer {
       background: rgba(15, 23, 42, 0.8);
       backdrop-filter: blur(12px);
       color: #cbd5e1;
       text-align: center;
       padding: 20px 16px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      border-top: 1px solid rgba(255,255,255,0.2);
     }
+
     .designer-credit {
       background: rgba(10, 15, 28, 0.8);
       backdrop-filter: blur(10px);
@@ -353,20 +322,16 @@
       font-size: 0.75rem;
       font-weight: 600;
       color: #facc15;
-      border-top: 1px solid rgba(255,215,0,0.3);
-      font-family: 'Tajawal', monospace;
+      border-top: 1px solid rgba(255, 215, 0, 0.3);
     }
+
     .designer-credit .highlight {
       background: rgba(255, 180, 71, 0.2);
       padding: 2px 10px;
       border-radius: 40px;
       color: #ffd966;
-      margin: 0 4px;
-      font-weight: 800;
-      backdrop-filter: blur(2px);
     }
 
-    /* toast زجاجي */
     .toast-msg {
       position: fixed;
       bottom: 30px;
@@ -379,21 +344,21 @@
       color: white;
       padding: 12px 20px;
       border-radius: 50px;
-      font-size: 0.85rem;
-      font-weight: 500;
       text-align: center;
       z-index: 999;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
       opacity: 0;
       transition: opacity 0.2s;
       pointer-events: none;
-      border: 1px solid rgba(255,255,255,0.2);
     }
 
     @media (max-width: 480px) {
-      .info-grid { grid-template-columns: 1fr; }
-      .search-card, #result { padding: 20px; }
-      .welcome-card { font-size: 0.9rem; }
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+      .search-card,
+      #result {
+        padding: 20px;
+      }
     }
   </style>
 </head>
@@ -401,10 +366,10 @@
 
 <header>
   <img src="assets/logo.png" alt="شعار المدرسة" class="header-logo"
-       onerror="this.style.display='none'; document.getElementById('logo-placeholder').style.display='flex';" />
+    onerror="this.style.display='none'; document.getElementById('logo-placeholder').style.display='flex';" />
   <div id="logo-placeholder" class="header-logo-placeholder" style="display:none;">🏫</div>
   <h1>مدرسة أبو القاسم الزهراوي للتعليم الأساسي (٥–٩)</h1>
-  <h2>نظام استلام المستندات الإلكترونية – بتقنية الزجاج</h2>
+  <h2>نظام استلام المستندات الإلكترونية – بيانات تجريبية مدمجة</h2>
 </header>
 
 <div class="privacy-banner">
@@ -412,28 +377,26 @@
 </div>
 
 <main>
-  <div class="welcome-card glass">
-    ✨ أولياء الأمور الكرام، أدخل الرقم المدني للطالب ثم اضغط "بحث". سيتم عرض الشهادة فورًا للتحميل.
-    <br>💡 <strong>ملاحظة:</strong> إذا لم تظهر النتيجة، تأكد من إدخال الرقم بشكل صحيح (أرقام فقط).
+  <div class="welcome-card">
+    ✨ أولياء الأمور الكرام، أدخل الرقم المدني للطالب ثم اضغط "بحث".<br>
+    💡 <strong>بيانات تجريبية:</strong> جرب الأرقام <strong>123456</strong> أو <strong>789012</strong> أو <strong>555666</strong>.
   </div>
 
-  <div class="search-card glass">
+  <div class="search-card">
     <label>🔢 الرقم المدني للطالب</label>
     <div class="input-wrapper">
-      <input type="text" id="civil-input" inputmode="numeric" maxlength="20" 
-             placeholder="مثال: 1234567890" autocomplete="off" />
-      <button type="button" class="clear-input" id="clearInputBtn" aria-label="مسح الحقل">✖</button>
+      <input type="text" id="civil-input" inputmode="numeric" maxlength="20" placeholder="مثال: 123456" autocomplete="off" />
+      <button type="button" class="clear-input" id="clearInputBtn">✖</button>
     </div>
-    <button class="btn-search" id="search-btn" onclick="performSearch()">
-      🔍 بحث عن الشهادة
-    </button>
+    <button class="btn-search" id="search-btn" onclick="performSearch()">🔍 بحث عن الشهادة</button>
   </div>
 
   <div id="loading">
     <div class="spinner"></div>
-    <span>جارٍ التحقق من الرقم المدني واسترجاع الشهادة...</span>
+    <span>جارٍ البحث عن الشهادة...</span>
   </div>
 
+  <!-- قسم النتيجة (يظهر فقط بعد البحث الناجح) -->
   <div id="result">
     <div class="result-header">
       <div class="result-icon">✅</div>
@@ -445,9 +408,7 @@
       <div class="info-item"><div class="label">الشعبة</div><div class="value" id="r-class">—</div></div>
       <div class="info-item"><div class="label">الرقم المدني</div><div class="value" id="r-id">—</div></div>
     </div>
-    <a id="download-link" href="#" download class="btn-download glass-btn">
-      📥 تحميل الشهادة (PDF)
-    </a>
+    <a id="download-link" href="#" download class="btn-download">📥 تحميل الشهادة (PDF)</a>
   </div>
 
   <div id="error-msg">
@@ -456,17 +417,18 @@
 </main>
 
 <footer>© مدرسة أبو القاسم الزهراوي للتعليم الأساسي (٥–٩) – جميع الحقوق محفوظة</footer>
-
-<div class="designer-credit">
-  ⚡ برمجة وتصميم <span class="highlight">أستاذ أحمد الضامري</span> 🎨
-</div>
-
+<div class="designer-credit">⚡ برمجة وتصميم <span class="highlight">أستاذ أحمد الضامري</span> 🎨</div>
 <div id="toastMessage" class="toast-msg"></div>
 
 <script>
-  // ------------------- جميع الوظائف السابقة محسنة مع تأثيرات -------------------
-  const DATA_URL = 'students.json';
-  let studentsData = null;
+  // ------------------- بيانات تجريبية مدمجة (تعمل بدون أي ملف خارجي) -------------------
+  const MOCK_STUDENTS = [
+    { civil_id: "123456", student_name: "أحمد محمد علي", grade: "السابع", class: "أ", pdf: "#" },
+    { civil_id: "789012", student_name: "فاطمة يوسف حسن", grade: "الثامن", class: "ب", pdf: "#" },
+    { civil_id: "555666", student_name: "عبد الله خالد سعيد", grade: "التاسع", class: "ج", pdf: "#" }
+  ];
+
+  let studentsData = [...MOCK_STUDENTS]; // استخدام البيانات المدمجة مباشرة
   let toastTimeout = null;
 
   function showToast(msg, isError = false) {
@@ -479,7 +441,7 @@
   }
 
   const inputEl = document.getElementById('civil-input');
-  inputEl.addEventListener('input', function(e) {
+  inputEl.addEventListener('input', function (e) {
     this.value = this.value.replace(/\D/g, '');
   });
   document.getElementById('clearInputBtn').addEventListener('click', () => {
@@ -491,21 +453,8 @@
   });
   inputEl.focus();
 
-  async function preloadData() {
-    try {
-      const res = await fetch(DATA_URL);
-      if (!res.ok) throw new Error();
-      studentsData = await res.json();
-      console.log('✅ بيانات الطلاب جاهزة (زجاجي)');
-    } catch(e) {
-      studentsData = null;
-      console.warn('⚠️ لم يتم العثور على students.json');
-    }
-  }
-  preloadData();
-
-  function show(id) { const el = document.getElementById(id); if(el) el.style.display = 'flex'; }
-  function hide(id) { const el = document.getElementById(id); if(el) el.style.display = 'none'; }
+  function hide(id) { const el = document.getElementById(id); if (el) el.style.display = 'none'; }
+  function show(id) { const el = document.getElementById(id); if (el) el.style.display = 'flex'; }
   function setLoading(on) {
     document.getElementById('loading').style.display = on ? 'flex' : 'none';
     document.getElementById('search-btn').disabled = on;
@@ -514,34 +463,29 @@
   async function performSearch() {
     const raw = inputEl.value.trim();
     const query = raw.replace(/\s/g, '');
+    // إخفاء النتيجة والخطأ أولاً
     hide('result');
     hide('error-msg');
+
     if (!query) {
       showToast('📛 الرجاء إدخال الرقم المدني أولاً.', true);
       inputEl.focus();
       return;
     }
+
     setLoading(true);
-    try {
-      if (!studentsData) {
-        const res = await fetch(DATA_URL + '?nocache=' + Date.now());
-        if (!res.ok) throw new Error('ملف البيانات غير موجود');
-        studentsData = await res.json();
-      }
-      const student = studentsData.find(s => String(s.civil_id).trim() === query);
-      setLoading(false);
-      if (student) {
-        displayStudent(student);
-        showToast(`🎉 مرحبا ${student.student_name}، تم العثور على الشهادة`, false);
-      } else {
-        showErrorMsg('❌ لم يتم العثور على شهادة بهذا الرقم المدني. تأكد من الرقم أو تواصل مع إدارة المدرسة.');
-      }
-    } catch (err) {
-      setLoading(false);
-      let helpMsg = '⚠️ تعذر الاتصال بقاعدة البيانات. تأكد من وجود ملف students.json بالهيكل الصحيح. مثال: [{"civil_id":"1234567890","student_name":"أحمد","grade":"سابع","class":"أ","pdf":"sample.pdf"}]';
-      showErrorMsg(helpMsg);
-      showToast('خطأ في تحميل البيانات، راجع المثال', true);
-      console.error(err);
+    // محاكاة تأخير بسيط للشبكة (لإظهار تأثير التحميل)
+    await new Promise(resolve => setTimeout(resolve, 600));
+
+    // البحث في البيانات المدمجة
+    const student = studentsData.find(s => String(s.civil_id).trim() === query);
+    setLoading(false);
+
+    if (student) {
+      displayStudent(student);
+      showToast(`🎉 مرحباً ${student.student_name}، تم العثور على الشهادة`, false);
+    } else {
+      showErrorMsg('❌ لم يتم العثور على شهادة بهذا الرقم المدني. جرب الأرقام: 123456, 789012, 555666');
     }
   }
 
@@ -550,21 +494,20 @@
     document.getElementById('r-grade').textContent = s.grade;
     document.getElementById('r-class').textContent = s.class;
     document.getElementById('r-id').textContent = s.civil_id;
+
     const link = document.getElementById('download-link');
     if (s.pdf && s.pdf !== '#') {
       link.href = s.pdf;
       link.download = (s.student_name || 'شهادة') + '.pdf';
-      link.onclick = (e) => {
-        showToast(`⏳ جارٍ تحميل شهادة ${s.student_name} ...`, false);
-        setTimeout(() => showToast(`✅ بدأ التحميل`, false), 800);
-      };
+      link.onclick = () => { showToast(`⏳ جارٍ تحميل شهادة ${s.student_name}...`, false); };
     } else {
       link.href = '#';
       link.onclick = (e) => {
         e.preventDefault();
-        showToast('📄 رابط الشهادة غير مفعل بعد. يرجى رفع الملفات على السيرفر.', true);
+        showToast('📄 رابط الشهادة غير مفعل بعد (بيانات تجريبية)، يمكنك استبدال الرابط لاحقاً.', true);
       };
     }
+    // إظهار قسم النتيجة
     show('result');
     document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
@@ -575,15 +518,11 @@
     document.getElementById('error-msg').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
-  inputEl.addEventListener('keypress', (e) => { if(e.key === 'Enter') performSearch(); });
+  inputEl.addEventListener('keypress', (e) => { if (e.key === 'Enter') performSearch(); });
 
   window.addEventListener('load', () => {
-    setTimeout(() => {
-      if(!studentsData) showToast('💡 نصيحة: قم بإنشاء ملف students.json بنفس المجلد لعمل تجريبي سريع', false);
-      else showToast('✨ النظام الزجاجي جاهز – أدخل الرقم المدني', false);
-    }, 500);
+    showToast('✨ النظام جاهز - أدخل 123456 أو 789012 أو 555666', false);
   });
 </script>
-
 </body>
 </html>
