@@ -1,411 +1,439 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>نظام استلام المستندات – مدرسة أبو القاسم الزهراوي</title>
-  <!-- Google Fonts: Tajawal -->
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
-  <style>
-    /* ─── Reset & Base ───────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>نظام استلام المستندات – مدرسة أبو القاسم الزهراوي</title>
 
-    :root {
-      --red:        #d71920;
-      --red-dark:   #b5151b;
-      --green:      #007a3d;
-      --green-light:#eefaf3;
-      --white:      #ffffff;
-      --text-dark:  #1f2937;
-      --text-muted: #4b5563;
-      --border:     #e5e7eb;
-      --shadow:     0 8px 28px rgba(0,0,0,.08);
-      --radius:     20px;
-      --glass-bg:   rgba(255, 255, 255, 0.7);
-      --glass-border: rgba(255, 255, 255, 0.5);
-      --glass-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    }
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 
-    body {
-      font-family: 'Tajawal', 'Cairo', 'Noto Sans Arabic', 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
-      color: var(--text-dark);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      line-height: 1.5;
-      font-weight: 400;
-    }
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
 
-    /* Header زجاجي */
-    header {
-      background: rgba(215, 25, 32, 0.75);
-      backdrop-filter: blur(12px);
-      color: white;
-      padding: 28px 16px 24px;
-      text-align: center;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-      border-bottom: 1px solid rgba(255,255,255,0.3);
-    }
+:root{
+  --red:#d71920;
+  --green:#007a3d;
+  --green2:#0ea85f;
+  --bg1:#e8f1ff;
+  --bg2:#d8e9f7;
+  --text:#172033;
+  --muted:#667085;
+  --card:rgba(255,255,255,.86);
+  --border:rgba(255,255,255,.75);
+  --shadow:0 14px 35px rgba(15,23,42,.12);
+  --radius:24px;
+}
 
-    .header-logo {
-      width: 84px;
-      height: 84px;
-      object-fit: contain;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.2);
-      backdrop-filter: blur(4px);
-      padding: 6px;
-      margin-bottom: 14px;
-      transition: 0.2s;
-      border: 1px solid rgba(255,255,255,0.4);
-    }
+body{
+  font-family:'Tajawal','Cairo',sans-serif;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:var(--text);
+  min-height:100vh;
+  line-height:1.7;
+}
 
-    .header-logo-placeholder {
-      width: 84px;
-      height: 84px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.2);
-      backdrop-filter: blur(5px);
-      border: 2px solid rgba(255,255,255,.6);
-      margin: 0 auto 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 36px;
-    }
+header{
+  background:linear-gradient(135deg,rgba(215,25,32,.92),rgba(181,21,27,.9));
+  color:#fff;
+  text-align:center;
+  padding:28px 16px 24px;
+  box-shadow:0 8px 25px rgba(0,0,0,.18);
+}
 
-    header h1 { font-size: clamp(1.3rem, 5vw, 1.8rem); font-weight: 800; }
-    header h2 { font-size: clamp(0.9rem, 3.5vw, 1.1rem); font-weight: 500; }
+.header-logo{
+  width:82px;
+  height:82px;
+  object-fit:contain;
+  border-radius:50%;
+  background:rgba(255,255,255,.18);
+  padding:8px;
+  margin-bottom:12px;
+}
 
-    /* Privacy banner */
-    .privacy-banner {
-      background: rgba(255, 247, 230, 0.8);
-      backdrop-filter: blur(8px);
-      border-bottom: 2px solid #f5b042;
-      padding: 12px 20px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: #b45f06;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+.header-logo-placeholder{
+  width:82px;
+  height:82px;
+  border-radius:50%;
+  background:rgba(255,255,255,.2);
+  margin:0 auto 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:36px;
+}
 
-    /* Main */
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 32px 20px 48px;
-      gap: 24px;
-    }
+header h1{
+  font-size:clamp(1.2rem,4.5vw,1.8rem);
+  font-weight:900;
+}
 
-    /* بطاقات زجاجية */
-    .welcome-card, .search-card, #result, #error-msg {
-      width: 100%;
-      max-width: 640px;
-      border-radius: var(--radius);
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(12px);
-      box-shadow: var(--glass-shadow);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-    }
+header h2{
+  font-size:clamp(.9rem,3.5vw,1.05rem);
+  font-weight:500;
+  opacity:.95;
+}
 
-    .welcome-card {
-      background: rgba(238, 250, 243, 0.8);
-      border-right: 6px solid var(--green);
-      padding: 18px 24px;
-      font-size: 1rem;
-      font-weight: 500;
-    }
+.privacy-banner{
+  background:rgba(255,248,231,.88);
+  color:#9a5a00;
+  padding:12px 18px;
+  text-align:center;
+  font-weight:700;
+  border-bottom:2px solid #f3b442;
+}
 
-    .search-card { padding: 32px 28px; }
-    .search-card label {
-      font-weight: 800;
-      font-size: 1.05rem;
-      margin-bottom: 12px;
-      display: flex;
-      gap: 8px;
-    }
+main{
+  width:100%;
+  max-width:680px;
+  margin:auto;
+  padding:26px 16px 44px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
 
-    /* حقل الإدخال مع cursor في المنتصف */
-    .input-wrapper {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-    .input-wrapper input {
-      width: 100%;
-      padding: 14px 48px 14px 16px;
-      border: 2px solid rgba(255, 255, 255, 0.8);
-      border-radius: 40px;
-      font-size: 1rem;
-      font-family: 'Tajawal', monospace;
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(4px);
-      transition: 0.2s;
-      direction: ltr;
-      text-align: center;  /* ← مؤشر الكتابة في منتصف الحقل */
-    }
-    .input-wrapper input:focus {
-      border-color: var(--red);
-      background: rgba(255, 255, 255, 0.9);
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(215,25,32,0.2);
-    }
-    /* زر مسح الحقل */
-    .clear-input {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(226, 232, 240, 0.7);
-      backdrop-filter: blur(2px);
-      border: none;
-      width: 28px;
-      height: 28px;
-      border-radius: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 18px;
-      transition: 0.2s;
-    }
-    .clear-input:hover {
-      background: rgba(203, 213, 225, 0.9);
-      transform: translateY(-50%) scale(1.05);
-    }
+.welcome-card,
+.search-card,
+#result,
+#error-msg,
+#loading{
+  background:var(--card);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
 
-    /* زر البحث زجاجي */
-    .btn-search {
-      margin-top: 20px;
-      width: 100%;
-      padding: 15px;
-      background: rgba(215, 25, 32, 0.85);
-      backdrop-filter: blur(8px);
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      border-radius: 50px;
-      font-size: 1.05rem;
-      font-weight: 800;
-      cursor: pointer;
-      transition: 0.25s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    .btn-search:hover {
-      background: var(--red);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px -5px rgba(215,25,32,0.4);
-    }
-    .btn-search:disabled {
-      background: #a0aec0;
-      cursor: not-allowed;
-      transform: none;
-    }
+.welcome-card{
+  padding:17px 20px;
+  border-right:6px solid var(--green);
+  font-weight:700;
+}
 
-    /* Loading */
-    #loading {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(12px);
-      padding: 20px 32px;
-      border-radius: 60px;
-    }
-    .spinner {
-      width: 38px;
-      height: 38px;
-      border: 4px solid rgba(215, 25, 32, 0.2);
-      border-top-color: var(--red);
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
+.search-card{
+  padding:24px 20px;
+}
 
-    /* بطاقة النتيجة (تظهر فقط بعد البحث الناجح) */
-    #result {
-      display: none;
-      background: rgba(255, 255, 255, 0.8);
-      padding: 28px;
-      border-top: 6px solid var(--green);
-      animation: fadeSlideUp 0.3s ease;
-    }
-    @keyframes fadeSlideUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .result-header {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-    .result-icon {
-      width: 58px;
-      height: 58px;
-      background: rgba(0, 122, 61, 0.15);
-      backdrop-filter: blur(4px);
-      border-radius: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-    }
-    .result-header h3 {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: var(--green);
-    }
-    .result-header p {
-      font-size: 0.85rem;
-      font-weight: 500;
-    }
-    .info-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 28px;
-    }
-    .info-item {
-      background: rgba(248, 250, 252, 0.7);
-      backdrop-filter: blur(4px);
-      border-radius: 20px;
-      padding: 12px 16px;
-    }
-    .info-item .label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: #4a5b7a;
-    }
-    .info-item .value {
-      font-size: 1.05rem;
-      font-weight: 800;
-      margin-top: 6px;
-      word-break: break-word;
-    }
-    .btn-download {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: rgba(0, 122, 61, 0.85);
-      backdrop-filter: blur(6px);
-      padding: 14px;
-      border-radius: 50px;
-      color: white;
-      font-weight: 800;
-      text-decoration: none;
-      transition: 0.2s;
-    }
-    .btn-download:hover {
-      background: #007a3d;
-      transform: scale(0.98);
-    }
+.search-card label{
+  display:block;
+  margin-bottom:10px;
+  font-size:1.05rem;
+  font-weight:900;
+}
 
-    /* خطأ */
-    #error-msg {
-      display: none;
-      background: rgba(255, 240, 242, 0.85);
-      border-right: 6px solid var(--red);
-      padding: 20px 24px;
-      align-items: center;
-      gap: 14px;
-      font-weight: 500;
-    }
+.input-wrapper{
+  position:relative;
+}
 
-    /* Footer و Designer Credit */
-    footer {
-      background: rgba(15, 23, 42, 0.8);
-      backdrop-filter: blur(12px);
-      color: #cbd5e1;
-      text-align: center;
-      padding: 20px 16px;
-    }
-    .designer-credit {
-      background: rgba(10, 15, 28, 0.8);
-      backdrop-filter: blur(10px);
-      text-align: center;
-      padding: 12px 16px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #facc15;
-      border-top: 1px solid rgba(255, 215, 0, 0.3);
-    }
-    .designer-credit .highlight {
-      background: rgba(255, 180, 71, 0.2);
-      padding: 2px 10px;
-      border-radius: 40px;
-      color: #ffd966;
-      font-weight: 800;
-    }
+.input-wrapper input{
+  width:100%;
+  height:56px;
+  border:2px solid #edf2f7;
+  border-radius:18px;
+  background:#fff;
+  padding:0 48px 0 48px;
+  font-size:1.05rem;
+  font-weight:700;
+  text-align:center;
+  direction:ltr;
+  font-family:'Tajawal',sans-serif;
+  outline:none;
+}
 
-    /* Toast message */
-    .toast-msg {
-      position: fixed;
-      bottom: 30px;
-      left: 20px;
-      right: 20px;
-      max-width: 400px;
-      margin: 0 auto;
-      background: rgba(30, 41, 59, 0.9);
-      backdrop-filter: blur(12px);
-      color: white;
-      padding: 12px 20px;
-      border-radius: 50px;
-      font-size: 0.85rem;
-      text-align: center;
-      z-index: 999;
-      opacity: 0;
-      transition: opacity 0.2s;
-      pointer-events: none;
-    }
+.input-wrapper input:focus{
+  border-color:var(--red);
+  box-shadow:0 0 0 4px rgba(215,25,32,.13);
+}
 
-    /* Responsive */
-    @media (max-width: 480px) {
-      .info-grid { grid-template-columns: 1fr; }
-      .search-card, #result { padding: 20px; }
-      .welcome-card { font-size: 0.9rem; }
-    }
-  </style>
+.clear-input{
+  position:absolute;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  width:32px;
+  height:32px;
+  border:0;
+  border-radius:50%;
+  background:#eef2f7;
+  cursor:pointer;
+  font-size:15px;
+}
+
+.btn-search,
+.btn-download{
+  width:100%;
+  border:0;
+  text-decoration:none;
+  color:#fff;
+  font-family:'Tajawal',sans-serif;
+  font-weight:900;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.btn-search{
+  margin-top:16px;
+  height:58px;
+  border-radius:18px;
+  background:linear-gradient(135deg,var(--red),#b5151b);
+  font-size:1.08rem;
+}
+
+.btn-search:active,
+.btn-download:active{
+  transform:scale(.98);
+}
+
+.btn-search:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+#loading{
+  display:none;
+  padding:20px;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  font-weight:800;
+}
+
+.spinner{
+  width:38px;
+  height:38px;
+  border:4px solid rgba(215,25,32,.18);
+  border-top-color:var(--red);
+  border-radius:50%;
+  animation:spin .75s linear infinite;
+}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+
+#result{
+  display:none;
+  padding:20px;
+  overflow:hidden;
+  position:relative;
+}
+
+#result::before{
+  content:"🇴🇲";
+  position:absolute;
+  top:-22px;
+  left:-18px;
+  font-size:120px;
+  opacity:.045;
+  pointer-events:none;
+}
+
+.result-header{
+  background:linear-gradient(135deg,#e8fff2,#f7fffb);
+  border:2px solid rgba(14,168,95,.22);
+  border-radius:22px;
+  padding:18px;
+  text-align:center;
+  margin-bottom:16px;
+}
+
+.result-icon{
+  width:66px;
+  height:66px;
+  margin:0 auto 10px;
+  background:rgba(14,168,95,.14);
+  color:var(--green);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:34px;
+}
+
+.result-header h3{
+  color:var(--green);
+  font-size:1.45rem;
+  font-weight:900;
+}
+
+.result-header p{
+  color:var(--muted);
+  font-weight:700;
+  font-size:.95rem;
+}
+
+.info-grid{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.info-item{
+  background:#fff;
+  border:1px solid #edf2f7;
+  border-radius:18px;
+  padding:14px 16px;
+  box-shadow:0 6px 18px rgba(15,23,42,.05);
+}
+
+.info-item .label{
+  color:var(--muted);
+  font-size:.85rem;
+  font-weight:800;
+  margin-bottom:5px;
+}
+
+.info-item .value{
+  color:var(--text);
+  font-size:1.15rem;
+  font-weight:900;
+  line-height:1.9;
+  word-break:normal;
+  overflow-wrap:break-word;
+  white-space:normal;
+}
+
+.btn-download{
+  height:64px;
+  border-radius:20px;
+  background:linear-gradient(135deg,var(--green),var(--green2));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  font-size:1.15rem;
+  box-shadow:0 10px 22px rgba(0,122,61,.22);
+}
+
+#error-msg{
+  display:none;
+  padding:18px;
+  border-right:6px solid var(--red);
+  background:rgba(255,241,242,.92);
+  color:#9f1239;
+  font-weight:800;
+  gap:10px;
+}
+
+footer{
+  background:rgba(15,23,42,.86);
+  color:#cbd5e1;
+  text-align:center;
+  padding:18px 14px;
+  font-size:.85rem;
+}
+
+.designer-credit{
+  background:#0b1220;
+  color:#facc15;
+  text-align:center;
+  padding:10px 12px;
+  font-size:.78rem;
+  font-weight:800;
+}
+
+.designer-credit .highlight{
+  background:rgba(250,204,21,.14);
+  padding:3px 10px;
+  border-radius:999px;
+}
+
+.toast-msg{
+  position:fixed;
+  right:16px;
+  left:16px;
+  bottom:24px;
+  max-width:420px;
+  margin:auto;
+  background:rgba(15,23,42,.92);
+  color:white;
+  padding:13px 18px;
+  border-radius:999px;
+  text-align:center;
+  font-weight:800;
+  font-size:.9rem;
+  opacity:0;
+  transition:.25s;
+  pointer-events:none;
+  z-index:9999;
+}
+
+@media(max-width:480px){
+  main{
+    padding:20px 12px 36px;
+  }
+
+  .welcome-card,
+  .search-card,
+  #result{
+    border-radius:22px;
+  }
+
+  .search-card,
+  #result{
+    padding:16px;
+  }
+
+  .result-header{
+    padding:16px 12px;
+  }
+
+  .result-header h3{
+    font-size:1.35rem;
+  }
+
+  .info-item{
+    padding:13px 14px;
+  }
+
+  .info-item .value{
+    font-size:1.08rem;
+  }
+
+  .btn-download{
+    height:62px;
+  }
+}
+</style>
 </head>
+
 <body>
 
 <header>
   <img src="assets/logo.png" alt="شعار المدرسة" class="header-logo"
-       onerror="this.style.display='none'; document.getElementById('logo-placeholder').style.display='flex';" />
+       onerror="this.style.display='none';document.getElementById('logo-placeholder').style.display='flex';">
   <div id="logo-placeholder" class="header-logo-placeholder" style="display:none;">🏫</div>
   <h1>مدرسة أبو القاسم الزهراوي للتعليم الأساسي (٥–٩)</h1>
   <h2>نظام استلام المستندات الإلكترونية</h2>
 </header>
 
 <div class="privacy-banner">
-  <span>🔒</span> يرجى عدم مشاركة المستندات أو الروابط حفاظًا على خصوصية الطلبة.
+  🔒 يرجى عدم مشاركة المستندات أو الروابط حفاظًا على خصوصية الطلبة.
 </div>
 
 <main>
+
   <div class="welcome-card">
     ✨ أولياء الأمور الكرام، أدخل الرقم المدني للطالب ثم اضغط "بحث". سيتم عرض الشهادة فورًا للتحميل.
   </div>
 
   <div class="search-card">
-    <label>🔢 الرقم المدني للطالب</label>
+    <label for="civil-input">🔢 الرقم المدني للطالب</label>
+
     <div class="input-wrapper">
-      <input type="text" id="civil-input" inputmode="numeric" maxlength="20" 
-             placeholder="أدخل الرقم المدني هنا" autocomplete="off" />
-      <button type="button" class="clear-input" id="clearInputBtn">✖</button>
+      <input
+        type="text"
+        id="civil-input"
+        inputmode="numeric"
+        maxlength="20"
+        placeholder="أدخل الرقم المدني هنا"
+        autocomplete="off">
+      <button type="button" class="clear-input" id="clearInputBtn">×</button>
     </div>
-    <button class="btn-search" id="search-btn" onclick="performSearch()">🔍 بحث عن الشهادة</button>
+
+    <button class="btn-search" id="search-btn" onclick="performSearch()">
+      🔍 بحث عن الشهادة
+    </button>
   </div>
 
   <div id="loading">
@@ -413,160 +441,200 @@
     <span>جارٍ البحث عن الشهادة...</span>
   </div>
 
-  <!-- قسم النتيجة (يظهر فقط عند نجاح البحث) -->
   <div id="result">
     <div class="result-header">
       <div class="result-icon">✅</div>
-      <div><h3>تم العثور على الشهادة</h3><p>يمكنك تحميل المستند بصيغة PDF</p></div>
+      <h3>تم العثور على الشهادة</h3>
+      <p>يمكنك تحميل المستند بصيغة PDF</p>
     </div>
+
     <div class="info-grid">
-      <div class="info-item"><div class="label">اسم الطالب</div><div class="value" id="r-name">—</div></div>
-      <div class="info-item"><div class="label">الصف</div><div class="value" id="r-grade">—</div></div>
-      <div class="info-item"><div class="label">الشعبة</div><div class="value" id="r-class">—</div></div>
-      <div class="info-item"><div class="label">الرقم المدني</div><div class="value" id="r-id">—</div></div>
+      <div class="info-item">
+        <div class="label">👤 اسم الطالب</div>
+        <div class="value" id="r-name">—</div>
+      </div>
+
+      <div class="info-item">
+        <div class="label">🏫 الصف</div>
+        <div class="value" id="r-grade">—</div>
+      </div>
+
+      <div class="info-item">
+        <div class="label">📚 الشعبة</div>
+        <div class="value" id="r-class">—</div>
+      </div>
+
+      <div class="info-item">
+        <div class="label">🪪 الرقم المدني</div>
+        <div class="value" id="r-id">—</div>
+      </div>
     </div>
-    <a id="download-link" href="#" download class="btn-download">📥 تحميل الشهادة (PDF)</a>
+
+    <a id="download-link" href="#" download class="btn-download">
+      📥 تحميل الشهادة PDF
+    </a>
   </div>
 
   <div id="error-msg">
-    <span>⚠️</span> <span id="error-text">لم يتم العثور على نتيجة. تأكد من الرقم المدني.</span>
+    <span>⚠️</span>
+    <span id="error-text">لم يتم العثور على نتيجة. تأكد من الرقم المدني.</span>
   </div>
+
 </main>
 
-<footer>© مدرسة أبو القاسم الزهراوي للتعليم الأساسي (٥–٩) – جميع الحقوق محفوظة</footer>
-<div class="designer-credit">⚡ برمجة وتصميم <span class="highlight">أستاذ أحمد الضامري</span> 🎨</div>
+<footer>
+  © مدرسة أبو القاسم الزهراوي للتعليم الأساسي (٥–٩) – جميع الحقوق محفوظة
+</footer>
+
+<div class="designer-credit">
+  ⚡ برمجة وتصميم <span class="highlight">أستاذ أحمد الضامري</span> 🎨
+</div>
+
 <div id="toastMessage" class="toast-msg"></div>
 
 <script>
-  // ─── رابط البيانات (students.json) كما في أول كود ─────────────────
-  const DATA_URL = 'students.json';
-  let studentsData = null;
+const DATA_URL = 'students.json';
+let studentsData = null;
 
-  // ─── تحميل البيانات مسبقًا (اختياري، ولكن يعاد تحميلها عند الحاجة) ──
-  async function preloadData() {
-    try {
-      const res = await fetch(DATA_URL);
-      if (!res.ok) throw new Error();
+async function preloadData(){
+  try{
+    const res = await fetch(DATA_URL + '?t=' + Date.now());
+    if(!res.ok) throw new Error();
+    studentsData = await res.json();
+    console.log('✅ بيانات الطلاب جاهزة');
+  }catch(e){
+    studentsData = null;
+    console.warn('⚠️ لم يتم تحميل students.json');
+  }
+}
+
+preloadData();
+
+const inputEl = document.getElementById('civil-input');
+const clearBtn = document.getElementById('clearInputBtn');
+const searchBtn = document.getElementById('search-btn');
+
+inputEl.addEventListener('input',function(){
+  this.value = this.value.replace(/\D/g,'');
+});
+
+clearBtn.addEventListener('click',()=>{
+  inputEl.value = '';
+  inputEl.focus();
+  hide('result');
+  hide('error-msg');
+  showToast('🧹 تم مسح الحقل');
+});
+
+function hide(id){
+  const el = document.getElementById(id);
+  if(el) el.style.display = 'none';
+}
+
+function show(id,display='block'){
+  const el = document.getElementById(id);
+  if(el) el.style.display = display;
+}
+
+function setLoading(on){
+  document.getElementById('loading').style.display = on ? 'flex' : 'none';
+  searchBtn.disabled = on;
+}
+
+function showToast(msg,isError=false){
+  const toast = document.getElementById('toastMessage');
+  toast.textContent = msg;
+  toast.style.background = isError ? 'rgba(153,27,27,.94)' : 'rgba(15,59,44,.94)';
+  toast.style.opacity = '1';
+
+  clearTimeout(window.toastTimeout);
+  window.toastTimeout = setTimeout(()=>{
+    toast.style.opacity = '0';
+  },3000);
+}
+
+async function performSearch(){
+  const query = inputEl.value.trim().replace(/\s/g,'');
+
+  hide('result');
+  hide('error-msg');
+
+  if(!query){
+    showToast('📛 الرجاء إدخال الرقم المدني أولاً.',true);
+    inputEl.focus();
+    return;
+  }
+
+  setLoading(true);
+
+  try{
+    if(!studentsData){
+      const res = await fetch(DATA_URL + '?t=' + Date.now());
+      if(!res.ok) throw new Error('لا يمكن تحميل بيانات الطلاب');
       studentsData = await res.json();
-      console.log('✅ بيانات الطلاب جاهزة');
-    } catch (e) {
-      studentsData = null;
-      console.warn('⚠️ لم يتم العثور على students.json، سيتم إعادة المحاولة عند البحث');
-    }
-  }
-  preloadData();
-
-  // ─── عناصر DOM ومساعدين ─────────────────────────────────────────
-  const inputEl = document.getElementById('civil-input');
-  const clearBtn = document.getElementById('clearInputBtn');
-  const searchBtn = document.getElementById('search-btn');
-
-  // السماح فقط بالأرقام
-  inputEl.addEventListener('input', function(e) {
-    this.value = this.value.replace(/\D/g, '');
-  });
-
-  clearBtn.addEventListener('click', () => {
-    inputEl.value = '';
-    inputEl.focus();
-    hide('result');
-    hide('error-msg');
-    showToast('🧹 تم مسح الحقل', false);
-  });
-
-  function hide(id) { const el = document.getElementById(id); if (el) el.style.display = 'none'; }
-  function show(id) { const el = document.getElementById(id); if (el) el.style.display = 'flex'; }
-  function setLoading(on) {
-    document.getElementById('loading').style.display = on ? 'flex' : 'none';
-    searchBtn.disabled = on;
-  }
-
-  function showToast(msg, isError = false) {
-    const toast = document.getElementById('toastMessage');
-    toast.textContent = msg;
-    toast.style.background = isError ? 'rgba(153, 27, 27, 0.9)' : 'rgba(15, 59, 44, 0.9)';
-    toast.style.opacity = '1';
-    if (window.toastTimeout) clearTimeout(window.toastTimeout);
-    window.toastTimeout = setTimeout(() => { toast.style.opacity = '0'; }, 3200);
-  }
-
-  // ─── وظيفة البحث الرئيسية (مثل أول كود) ─────────────────────────
-  async function performSearch() {
-    const raw = inputEl.value.trim();
-    const query = raw.replace(/\s/g, '');
-
-    hide('result');
-    hide('error-msg');
-
-    if (!query) {
-      showToast('📛 الرجاء إدخال الرقم المدني أولاً.', true);
-      inputEl.focus();
-      return;
     }
 
-    setLoading(true);
+    const student = studentsData.find(s => String(s.civil_id).trim() === query);
 
-    try {
-      // إذا لم تكن البيانات محملة مسبقًا، نحاول جلبها الآن مع كسر الكاش
-      if (!studentsData) {
-        const res = await fetch(DATA_URL + '?t=' + Date.now());
-        if (!res.ok) throw new Error('لا يمكن تحميل بيانات الطلاب.');
-        studentsData = await res.json();
-      }
+    setLoading(false);
 
-      const student = studentsData.find(s => String(s.civil_id).trim() === query);
-      setLoading(false);
-
-      if (student) {
-        displayStudent(student);
-        showToast(`🎉 مرحباً ${student.student_name}، تم العثور على الشهادة`, false);
-      } else {
-        showError('❌ لم يتم العثور على نتيجة بهذا الرقم المدني. يرجى التأكد من الرقم والمحاولة مجددًا.');
-      }
-    } catch (err) {
-      setLoading(false);
-      showError('⚠️ حدث خطأ أثناء البحث: ' + err.message + ' . تأكد من وجود ملف students.json في نفس المجلد.');
+    if(student){
+      displayStudent(student);
+      showToast('🎉 تم العثور على الشهادة');
+    }else{
+      showError('❌ لم يتم العثور على نتيجة بهذا الرقم المدني. يرجى التأكد من الرقم والمحاولة مجددًا.');
     }
+
+  }catch(err){
+    setLoading(false);
+    showError('⚠️ حدث خطأ أثناء البحث. تأكد من وجود ملف students.json في نفس المجلد.');
+  }
+}
+
+function displayStudent(student){
+  document.getElementById('r-name').textContent = student.student_name || '—';
+  document.getElementById('r-grade').textContent = student.grade || '—';
+  document.getElementById('r-class').textContent = student.class || '—';
+  document.getElementById('r-id').textContent = student.civil_id || '—';
+
+  const link = document.getElementById('download-link');
+
+  if(student.pdf && student.pdf !== '#'){
+    link.href = student.pdf;
+    link.download = (student.student_name || 'شهادة') + '.pdf';
+    link.onclick = () => showToast('⏳ جارٍ تحميل الشهادة...');
+  }else{
+    link.href = '#';
+    link.onclick = e => {
+      e.preventDefault();
+      showToast('📄 رابط الشهادة غير مفعل بعد.',true);
+    };
   }
 
-  function displayStudent(student) {
-    document.getElementById('r-name').textContent = student.student_name || '—';
-    document.getElementById('r-grade').textContent = student.grade || '—';
-    document.getElementById('r-class').textContent = student.class || '—';
-    document.getElementById('r-id').textContent = student.civil_id || '—';
-
-    const link = document.getElementById('download-link');
-    if (student.pdf && student.pdf !== '#') {
-      link.href = student.pdf;
-      link.download = (student.student_name || 'شهادة') + '.pdf';
-      link.onclick = () => { showToast(`⏳ جارٍ تحميل شهادة ${student.student_name}...`, false); };
-    } else {
-      link.href = '#';
-      link.onclick = (e) => {
-        e.preventDefault();
-        showToast('📄 رابط الشهادة غير مفعل بعد. يرجى رفع الملفات على السيرفر.', true);
-      };
-    }
-    show('result');
-    document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-
-  function showError(msg) {
-    document.getElementById('error-text').innerHTML = msg;
-    show('error-msg');
-    document.getElementById('error-msg').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-
-  // بحث عند الضغط على Enter
-  inputEl.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') performSearch();
+  show('result');
+  document.getElementById('result').scrollIntoView({
+    behavior:'smooth',
+    block:'start'
   });
+}
 
-  // رسالة ترحيب عند التحميل
-  window.addEventListener('load', () => {
-    inputEl.focus();
-    showToast('✨ النظام جاهز – أدخل الرقم المدني للبحث', false);
+function showError(msg){
+  document.getElementById('error-text').innerHTML = msg;
+  show('error-msg','flex');
+  document.getElementById('error-msg').scrollIntoView({
+    behavior:'smooth',
+    block:'center'
   });
+}
+
+inputEl.addEventListener('keypress',e=>{
+  if(e.key === 'Enter') performSearch();
+});
+
+window.addEventListener('load',()=>{
+  inputEl.focus();
+});
 </script>
+
 </body>
 </html>
