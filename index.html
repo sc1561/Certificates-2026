@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>نظام استلام المستندات – مدرسة أبو القاسم الزهراوي (بيانات تجريبية مدمجة)</title>
+  <title>نظام استلام المستندات – مدرسة أبو القاسم الزهراوي</title>
+  <!-- Google Fonts: Tajawal -->
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
   <style>
-    *,
-    *::before,
-    *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    /* ─── Reset & Base ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --red: #d71920;
-      --red-dark: #b5151b;
-      --green: #007a3d;
-      --green-light: #eefaf3;
-      --white: #ffffff;
-      --text-dark: #1f2937;
+      --red:        #d71920;
+      --red-dark:   #b5151b;
+      --green:      #007a3d;
+      --green-light:#eefaf3;
+      --white:      #ffffff;
+      --text-dark:  #1f2937;
       --text-muted: #4b5563;
-      --border: #e5e7eb;
-      --shadow: 0 8px 28px rgba(0, 0, 0, .08);
-      --radius: 20px;
-      --glass-bg: rgba(255, 255, 255, 0.7);
+      --border:     #e5e7eb;
+      --shadow:     0 8px 28px rgba(0,0,0,.08);
+      --radius:     20px;
+      --glass-bg:   rgba(255, 255, 255, 0.7);
       --glass-border: rgba(255, 255, 255, 0.5);
       --glass-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     }
@@ -37,14 +37,15 @@
       font-weight: 400;
     }
 
+    /* Header زجاجي */
     header {
       background: rgba(215, 25, 32, 0.75);
       backdrop-filter: blur(12px);
       color: white;
       padding: 28px 16px 24px;
       text-align: center;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      border-bottom: 1px solid rgba(255,255,255,0.3);
     }
 
     .header-logo {
@@ -52,21 +53,21 @@
       height: 84px;
       object-fit: contain;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255,255,255,0.2);
       backdrop-filter: blur(4px);
       padding: 6px;
       margin-bottom: 14px;
       transition: 0.2s;
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      border: 1px solid rgba(255,255,255,0.4);
     }
 
     .header-logo-placeholder {
       width: 84px;
       height: 84px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, .2);
+      background: rgba(255,255,255,.2);
       backdrop-filter: blur(5px);
-      border: 2px solid rgba(255, 255, 255, .6);
+      border: 2px solid rgba(255,255,255,.6);
       margin: 0 auto 14px;
       display: flex;
       align-items: center;
@@ -77,6 +78,7 @@
     header h1 { font-size: clamp(1.3rem, 5vw, 1.8rem); font-weight: 800; }
     header h2 { font-size: clamp(0.9rem, 3.5vw, 1.1rem); font-weight: 500; }
 
+    /* Privacy banner */
     .privacy-banner {
       background: rgba(255, 247, 230, 0.8);
       backdrop-filter: blur(8px);
@@ -92,6 +94,7 @@
       flex-wrap: wrap;
     }
 
+    /* Main */
     main {
       flex: 1;
       display: flex;
@@ -101,10 +104,8 @@
       gap: 24px;
     }
 
-    .welcome-card,
-    .search-card,
-    #result,
-    #error-msg {
+    /* بطاقات زجاجية */
+    .welcome-card, .search-card, #result, #error-msg {
       width: 100%;
       max-width: 640px;
       border-radius: var(--radius);
@@ -131,12 +132,12 @@
       gap: 8px;
     }
 
+    /* حقل الإدخال مع cursor في المنتصف */
     .input-wrapper {
       position: relative;
       display: flex;
       align-items: center;
     }
-
     .input-wrapper input {
       width: 100%;
       padding: 14px 48px 14px 16px;
@@ -148,15 +149,15 @@
       backdrop-filter: blur(4px);
       transition: 0.2s;
       direction: ltr;
+      text-align: center;  /* ← مؤشر الكتابة في منتصف الحقل */
     }
-
     .input-wrapper input:focus {
       border-color: var(--red);
       background: rgba(255, 255, 255, 0.9);
       outline: none;
-      box-shadow: 0 0 0 3px rgba(215, 25, 32, 0.2);
+      box-shadow: 0 0 0 3px rgba(215,25,32,0.2);
     }
-
+    /* زر مسح الحقل */
     .clear-input {
       position: absolute;
       left: 12px;
@@ -174,8 +175,14 @@
       cursor: pointer;
       font-weight: bold;
       font-size: 18px;
+      transition: 0.2s;
+    }
+    .clear-input:hover {
+      background: rgba(203, 213, 225, 0.9);
+      transform: translateY(-50%) scale(1.05);
     }
 
+    /* زر البحث زجاجي */
     .btn-search {
       margin-top: 20px;
       width: 100%;
@@ -194,13 +201,18 @@
       justify-content: center;
       gap: 8px;
     }
-
     .btn-search:hover {
       background: var(--red);
       transform: translateY(-2px);
-      box-shadow: 0 10px 20px -5px rgba(215, 25, 32, 0.4);
+      box-shadow: 0 10px 20px -5px rgba(215,25,32,0.4);
+    }
+    .btn-search:disabled {
+      background: #a0aec0;
+      cursor: not-allowed;
+      transform: none;
     }
 
+    /* Loading */
     #loading {
       display: none;
       flex-direction: column;
@@ -211,7 +223,6 @@
       padding: 20px 32px;
       border-radius: 60px;
     }
-
     .spinner {
       width: 38px;
       height: 38px;
@@ -220,24 +231,25 @@
       border-radius: 50%;
       animation: spin 0.7s linear infinite;
     }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
+    /* بطاقة النتيجة (تظهر فقط بعد البحث الناجح) */
     #result {
       display: none;
       background: rgba(255, 255, 255, 0.8);
       padding: 28px;
       border-top: 6px solid var(--green);
+      animation: fadeSlideUp 0.3s ease;
     }
-
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
     .result-header {
       display: flex;
       gap: 16px;
       margin-bottom: 24px;
     }
-
     .result-icon {
       width: 58px;
       height: 58px;
@@ -249,40 +261,39 @@
       justify-content: center;
       font-size: 28px;
     }
-
     .result-header h3 {
       font-size: 1.3rem;
       font-weight: 800;
       color: var(--green);
     }
-
+    .result-header p {
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
     .info-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
       margin-bottom: 28px;
     }
-
     .info-item {
       background: rgba(248, 250, 252, 0.7);
       backdrop-filter: blur(4px);
       border-radius: 20px;
       padding: 12px 16px;
     }
-
     .info-item .label {
       font-size: 0.7rem;
       font-weight: 700;
       text-transform: uppercase;
       color: #4a5b7a;
     }
-
     .info-item .value {
       font-size: 1.05rem;
       font-weight: 800;
       margin-top: 6px;
+      word-break: break-word;
     }
-
     .btn-download {
       display: flex;
       align-items: center;
@@ -295,8 +306,14 @@
       color: white;
       font-weight: 800;
       text-decoration: none;
+      transition: 0.2s;
+    }
+    .btn-download:hover {
+      background: #007a3d;
+      transform: scale(0.98);
     }
 
+    /* خطأ */
     #error-msg {
       display: none;
       background: rgba(255, 240, 242, 0.85);
@@ -304,8 +321,10 @@
       padding: 20px 24px;
       align-items: center;
       gap: 14px;
+      font-weight: 500;
     }
 
+    /* Footer و Designer Credit */
     footer {
       background: rgba(15, 23, 42, 0.8);
       backdrop-filter: blur(12px);
@@ -313,7 +332,6 @@
       text-align: center;
       padding: 20px 16px;
     }
-
     .designer-credit {
       background: rgba(10, 15, 28, 0.8);
       backdrop-filter: blur(10px);
@@ -324,14 +342,15 @@
       color: #facc15;
       border-top: 1px solid rgba(255, 215, 0, 0.3);
     }
-
     .designer-credit .highlight {
       background: rgba(255, 180, 71, 0.2);
       padding: 2px 10px;
       border-radius: 40px;
       color: #ffd966;
+      font-weight: 800;
     }
 
+    /* Toast message */
     .toast-msg {
       position: fixed;
       bottom: 30px;
@@ -344,6 +363,7 @@
       color: white;
       padding: 12px 20px;
       border-radius: 50px;
+      font-size: 0.85rem;
       text-align: center;
       z-index: 999;
       opacity: 0;
@@ -351,14 +371,11 @@
       pointer-events: none;
     }
 
+    /* Responsive */
     @media (max-width: 480px) {
-      .info-grid {
-        grid-template-columns: 1fr;
-      }
-      .search-card,
-      #result {
-        padding: 20px;
-      }
+      .info-grid { grid-template-columns: 1fr; }
+      .search-card, #result { padding: 20px; }
+      .welcome-card { font-size: 0.9rem; }
     }
   </style>
 </head>
@@ -366,10 +383,10 @@
 
 <header>
   <img src="assets/logo.png" alt="شعار المدرسة" class="header-logo"
-    onerror="this.style.display='none'; document.getElementById('logo-placeholder').style.display='flex';" />
+       onerror="this.style.display='none'; document.getElementById('logo-placeholder').style.display='flex';" />
   <div id="logo-placeholder" class="header-logo-placeholder" style="display:none;">🏫</div>
   <h1>مدرسة أبو القاسم الزهراوي للتعليم الأساسي (٥–٩)</h1>
-  <h2>نظام استلام المستندات الإلكترونية – بيانات تجريبية مدمجة</h2>
+  <h2>نظام استلام المستندات الإلكترونية</h2>
 </header>
 
 <div class="privacy-banner">
@@ -378,14 +395,14 @@
 
 <main>
   <div class="welcome-card">
-    ✨ أولياء الأمور الكرام، أدخل الرقم المدني للطالب ثم اضغط "بحث".<br>
-    💡 <strong>بيانات تجريبية:</strong> جرب الأرقام <strong>123456</strong> أو <strong>789012</strong> أو <strong>555666</strong>.
+    ✨ أولياء الأمور الكرام، أدخل الرقم المدني للطالب ثم اضغط "بحث". سيتم عرض الشهادة فورًا للتحميل.
   </div>
 
   <div class="search-card">
     <label>🔢 الرقم المدني للطالب</label>
     <div class="input-wrapper">
-      <input type="text" id="civil-input" inputmode="numeric" maxlength="20" placeholder="مثال: 123456" autocomplete="off" />
+      <input type="text" id="civil-input" inputmode="numeric" maxlength="20" 
+             placeholder="أدخل الرقم المدني هنا" autocomplete="off" />
       <button type="button" class="clear-input" id="clearInputBtn">✖</button>
     </div>
     <button class="btn-search" id="search-btn" onclick="performSearch()">🔍 بحث عن الشهادة</button>
@@ -396,7 +413,7 @@
     <span>جارٍ البحث عن الشهادة...</span>
   </div>
 
-  <!-- قسم النتيجة (يظهر فقط بعد البحث الناجح) -->
+  <!-- قسم النتيجة (يظهر فقط عند نجاح البحث) -->
   <div id="result">
     <div class="result-header">
       <div class="result-icon">✅</div>
@@ -421,49 +438,63 @@
 <div id="toastMessage" class="toast-msg"></div>
 
 <script>
-  // ------------------- بيانات تجريبية مدمجة (تعمل بدون أي ملف خارجي) -------------------
-  const MOCK_STUDENTS = [
-    { civil_id: "123456", student_name: "أحمد محمد علي", grade: "السابع", class: "أ", pdf: "#" },
-    { civil_id: "789012", student_name: "فاطمة يوسف حسن", grade: "الثامن", class: "ب", pdf: "#" },
-    { civil_id: "555666", student_name: "عبد الله خالد سعيد", grade: "التاسع", class: "ج", pdf: "#" }
-  ];
+  // ─── رابط البيانات (students.json) كما في أول كود ─────────────────
+  const DATA_URL = 'students.json';
+  let studentsData = null;
 
-  let studentsData = [...MOCK_STUDENTS]; // استخدام البيانات المدمجة مباشرة
-  let toastTimeout = null;
-
-  function showToast(msg, isError = false) {
-    const toast = document.getElementById('toastMessage');
-    toast.textContent = msg;
-    toast.style.background = isError ? 'rgba(153, 27, 27, 0.9)' : 'rgba(15, 59, 44, 0.9)';
-    toast.style.opacity = '1';
-    if (toastTimeout) clearTimeout(toastTimeout);
-    toastTimeout = setTimeout(() => { toast.style.opacity = '0'; }, 3200);
+  // ─── تحميل البيانات مسبقًا (اختياري، ولكن يعاد تحميلها عند الحاجة) ──
+  async function preloadData() {
+    try {
+      const res = await fetch(DATA_URL);
+      if (!res.ok) throw new Error();
+      studentsData = await res.json();
+      console.log('✅ بيانات الطلاب جاهزة');
+    } catch (e) {
+      studentsData = null;
+      console.warn('⚠️ لم يتم العثور على students.json، سيتم إعادة المحاولة عند البحث');
+    }
   }
+  preloadData();
 
+  // ─── عناصر DOM ومساعدين ─────────────────────────────────────────
   const inputEl = document.getElementById('civil-input');
-  inputEl.addEventListener('input', function (e) {
+  const clearBtn = document.getElementById('clearInputBtn');
+  const searchBtn = document.getElementById('search-btn');
+
+  // السماح فقط بالأرقام
+  inputEl.addEventListener('input', function(e) {
     this.value = this.value.replace(/\D/g, '');
   });
-  document.getElementById('clearInputBtn').addEventListener('click', () => {
+
+  clearBtn.addEventListener('click', () => {
     inputEl.value = '';
     inputEl.focus();
     hide('result');
     hide('error-msg');
     showToast('🧹 تم مسح الحقل', false);
   });
-  inputEl.focus();
 
   function hide(id) { const el = document.getElementById(id); if (el) el.style.display = 'none'; }
   function show(id) { const el = document.getElementById(id); if (el) el.style.display = 'flex'; }
   function setLoading(on) {
     document.getElementById('loading').style.display = on ? 'flex' : 'none';
-    document.getElementById('search-btn').disabled = on;
+    searchBtn.disabled = on;
   }
 
+  function showToast(msg, isError = false) {
+    const toast = document.getElementById('toastMessage');
+    toast.textContent = msg;
+    toast.style.background = isError ? 'rgba(153, 27, 27, 0.9)' : 'rgba(15, 59, 44, 0.9)';
+    toast.style.opacity = '1';
+    if (window.toastTimeout) clearTimeout(window.toastTimeout);
+    window.toastTimeout = setTimeout(() => { toast.style.opacity = '0'; }, 3200);
+  }
+
+  // ─── وظيفة البحث الرئيسية (مثل أول كود) ─────────────────────────
   async function performSearch() {
     const raw = inputEl.value.trim();
     const query = raw.replace(/\s/g, '');
-    // إخفاء النتيجة والخطأ أولاً
+
     hide('result');
     hide('error-msg');
 
@@ -474,54 +505,67 @@
     }
 
     setLoading(true);
-    // محاكاة تأخير بسيط للشبكة (لإظهار تأثير التحميل)
-    await new Promise(resolve => setTimeout(resolve, 600));
 
-    // البحث في البيانات المدمجة
-    const student = studentsData.find(s => String(s.civil_id).trim() === query);
-    setLoading(false);
+    try {
+      // إذا لم تكن البيانات محملة مسبقًا، نحاول جلبها الآن مع كسر الكاش
+      if (!studentsData) {
+        const res = await fetch(DATA_URL + '?t=' + Date.now());
+        if (!res.ok) throw new Error('لا يمكن تحميل بيانات الطلاب.');
+        studentsData = await res.json();
+      }
 
-    if (student) {
-      displayStudent(student);
-      showToast(`🎉 مرحباً ${student.student_name}، تم العثور على الشهادة`, false);
-    } else {
-      showErrorMsg('❌ لم يتم العثور على شهادة بهذا الرقم المدني. جرب الأرقام: 123456, 789012, 555666');
+      const student = studentsData.find(s => String(s.civil_id).trim() === query);
+      setLoading(false);
+
+      if (student) {
+        displayStudent(student);
+        showToast(`🎉 مرحباً ${student.student_name}، تم العثور على الشهادة`, false);
+      } else {
+        showError('❌ لم يتم العثور على نتيجة بهذا الرقم المدني. يرجى التأكد من الرقم والمحاولة مجددًا.');
+      }
+    } catch (err) {
+      setLoading(false);
+      showError('⚠️ حدث خطأ أثناء البحث: ' + err.message + ' . تأكد من وجود ملف students.json في نفس المجلد.');
     }
   }
 
-  function displayStudent(s) {
-    document.getElementById('r-name').textContent = s.student_name;
-    document.getElementById('r-grade').textContent = s.grade;
-    document.getElementById('r-class').textContent = s.class;
-    document.getElementById('r-id').textContent = s.civil_id;
+  function displayStudent(student) {
+    document.getElementById('r-name').textContent = student.student_name || '—';
+    document.getElementById('r-grade').textContent = student.grade || '—';
+    document.getElementById('r-class').textContent = student.class || '—';
+    document.getElementById('r-id').textContent = student.civil_id || '—';
 
     const link = document.getElementById('download-link');
-    if (s.pdf && s.pdf !== '#') {
-      link.href = s.pdf;
-      link.download = (s.student_name || 'شهادة') + '.pdf';
-      link.onclick = () => { showToast(`⏳ جارٍ تحميل شهادة ${s.student_name}...`, false); };
+    if (student.pdf && student.pdf !== '#') {
+      link.href = student.pdf;
+      link.download = (student.student_name || 'شهادة') + '.pdf';
+      link.onclick = () => { showToast(`⏳ جارٍ تحميل شهادة ${student.student_name}...`, false); };
     } else {
       link.href = '#';
       link.onclick = (e) => {
         e.preventDefault();
-        showToast('📄 رابط الشهادة غير مفعل بعد (بيانات تجريبية)، يمكنك استبدال الرابط لاحقاً.', true);
+        showToast('📄 رابط الشهادة غير مفعل بعد. يرجى رفع الملفات على السيرفر.', true);
       };
     }
-    // إظهار قسم النتيجة
     show('result');
     document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
-  function showErrorMsg(msg) {
+  function showError(msg) {
     document.getElementById('error-text').innerHTML = msg;
     show('error-msg');
     document.getElementById('error-msg').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
-  inputEl.addEventListener('keypress', (e) => { if (e.key === 'Enter') performSearch(); });
+  // بحث عند الضغط على Enter
+  inputEl.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') performSearch();
+  });
 
+  // رسالة ترحيب عند التحميل
   window.addEventListener('load', () => {
-    showToast('✨ النظام جاهز - أدخل 123456 أو 789012 أو 555666', false);
+    inputEl.focus();
+    showToast('✨ النظام جاهز – أدخل الرقم المدني للبحث', false);
   });
 </script>
 </body>
